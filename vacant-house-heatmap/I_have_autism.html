@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>Baltimore</title>
+		
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		
+		<script src="/build/heatmap.js"></script>
+		<script src="/plugins/gmaps-heatmap/gmaps-heatmap.js"></script>
+		
+	</head>
+	<body>
+		<h1> Heatmap </h1>
+		<div class="heatmap" id="map-canvas">
+		
+		</div>
+		
+		<script src="/js/heatmap.js"></script>
+		<script src="/js/gmaps-heatmap.js"></script>
+		<script>
+			// map center
+			var myLatLng = new google.maps.LatLng(39.2904, -76.6122) ;
+			// map options
+			var myOptions = {
+				
+				
+			} ;
+			// standard map
+			map = new google.maps.Map(document.getElementById("map-canvas"), myOptions) ;
+			// heatmap layer
+			heatmap = new HeatmapOverlay(map, {
+				"radius": 5,
+				"maxOpacity": 1,
+				"scaleRadius": true,
+				"useLocalExtreme": true,
+				latField: 'lat',
+				lngField: 'lng',
+				valueField: 'count'
+			}) ;
+			
+			var dataPoints = {
+				max: 99,
+				min: 0,
+				data: [{lat: 0, lng:0, count:10}]
+			} ;
+			heatmap.setData(dataPoints) ;
+			
+			
+		</script>
+	</body>
+</html>
