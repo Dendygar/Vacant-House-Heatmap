@@ -5,8 +5,8 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>Baltimore Heatmap</title>
     <style>
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0; font-family:sans-serif; }
+	html { height: 100% }
+	body { height: 100%; margin: 0; padding: 0; font-family:sans-serif; }
       #map-canvas { height: 100% }
       h1 { position:absolute; background:black; color:white; padding:10px; 
 font-weight:200; z-index:10000;}
@@ -17,8 +17,7 @@ rgba(0,0,0,.2);}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlnqX5vvltra6_fakQHr0RvaaES5p30cQ&sensor=false"></script>
     <script src="build/heatmap.js"></script>
     <script src="plugins/gmaps-heatmap.js"></script>
-	<script 
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   </head>
   <body>
     <h1>Vacant Housing Heatmap Baltimore</h1>
@@ -64,69 +63,30 @@ pointers &amp; inline documentation.
           }
         );
 		
-		url = 'https://data.baltimorecity.gov/resource/rw5h-nvv4.json?$select=location';
+	url = 'https://data.baltimorecity.gov/resource/rw5h-nvv4.json?$select=location';
+	
+	var dataPoints = [] ;
 		
-		/*
-        var test = {
-          max: 100,
-		  min: 0,
-          data: [{lat: 39.2904, lng:-76.6122, weight: 20}, {lat: 39.2904, 
-lng:-76.6122, weight: 20}]
-        };
-		console.log(test) ;
-		*/
-		
-		//var temp = {lat: 0, lng: 0, weight: 0} ;
-		
-			var dataPoints = [] ;
-		
-			$.getJSON(url, function(rawData){
-				for(var i = 0; i < rawData.length; i++){
-				//for(var i = 0; i < 1; i++){
+	$.getJSON(url, function(rawData){
+		for(var i = 0; i < rawData.length; i++){
 			
-					var dataPoint = {
-						lat: parseFloat(rawData[i].location.coordinates[1]),
-						lng: parseFloat(rawData[i].location.coordinates[0]),
-						weight: 40
-					} ;
-			
-					//dataPoint.lat = parseFloat(rawData[i].location.coordinates[1]);
-					//dataPoint.lng = parseFloat(rawData[i].location.coordinates[0]);
-					console.log(dataPoint) ;
-					//rawData[i].lat = parseFloat(rawData[i].location.coordinates[1]);
-					//rawData[i].lng = parseFloat(rawData[i].location.coordinates[0]);
-					//testData.push(rawData[i]);
-					console.log(typeof dataPoint);
+			var dataPoint = {
+				lat: parseFloat(rawData[i].location.coordinates[1]),
+				lng: parseFloat(rawData[i].location.coordinates[0]),
+				weight: 40
+			};
 				
-					dataPoints.push(dataPoint) ;
+			dataPoints.push(dataPoint);
+		};
 				
-					//testData[i].weight = 3;
-					//console.log(dataPoints[i]) ;
-				};
-				
-				var testData = {
-					max: 100, 
-					min: 0,
-					//data: dataPoints
-					//data: [{lat: 39.2904, lng:-76.6122, weight: 20}, {lat: 39.2904, 
-	//lng:-76.6122, weight: 20}]
-					data: dataPoints
-				};
-		
-		
-				//console.log (typeof da);
-				heatmap.setData(testData);
+		var testData = {
+			max: 100, 
+			min: 0,
+			data: dataPoints
+		};
+		heatmap.setData(testData);
 			
-			}); 
-		
-			//console.log(rawData) ;
-			console.log(dataPoints);
-
-		
-			
-		
-		//console.log(testData) ;
-		
+	});
 </script>
   </body>
 </html>
